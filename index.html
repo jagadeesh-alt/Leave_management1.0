@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Management System - Database-Driven Index</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.08);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .schema-section {
+            margin-bottom: 35px;
+            padding: 20px;
+            background-color: #f1f8ff;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        h2 {
+            color: #287bb5;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 18px;
+        }
+        .link-card {
+            background: white;
+            padding: 18px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        .link-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+        a {
+            color: #2c5e9e;
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        a:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+        .table-name {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            color: #495057;
+        }
+        p {
+            margin: 8px 0 0;
+            color: #6c757d;
+            font-size: 0.95rem;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 10px;
+            background-color: #e9ecef;
+            color: #495057;
+            margin-right: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Leave Management System </h1>
+        
+        <!-- Core Employee Tables Section -->
+        <div class="schema-section">
+            <h2>Employee Management</h2>
+            <div class="link-grid">
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/employees/employee_index.php">1. Employee Records</a>
+                    <span class="table-name">`employees`</span>
+                    <p>Manage all employee personal and professional information</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/departments/department_index.php">2. Departments</a>
+                    <span class="table-name">`departments`</span>
+                    <p>Organize company departments and hierarchy</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/Locations_Module/location_index.php">3. Locations</a>
+                    <span class="table-name">`locations`</span>
+                    <p>Manage office locations and addresses</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/positions/position_index.php">4. Positions</a>
+                    <span class="table-name">`positions`</span>
+                    <p>Define job positions and career levels</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/positions/position_index.php">5. Position History</a>
+                    <span class="table-name">`employee_position_history`</span>
+                    <p>Track employee career progression</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- User Authentication Section -->
+        <div class="schema-section">
+            <h2>User Authentication</h2>
+            <div class="link-grid">
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/users/user_index.php">6. User Accounts</a>
+                    <span class="table-name">`users`</span>
+                    <p>Manage system user accounts and credentials</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/roles/">7. User Roles</a>
+                    <span class="table-name">`roles`</span>
+                    <p>Define access levels and system roles</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/permissions/permission_index.php">8. Permissions</a>
+                    <span class="table-name">`permissions`</span>
+                    <p>Configure granular system permissions</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Leave Management Section -->
+        <div class="schema-section">
+            <h2>Leave Management Core</h2>
+            <div class="link-grid">
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/leave_types/leave_type_index.php">9. Leave Types</a>
+                    <span class="table-name">`leave_types`</span>
+                    <p>Configure different types of leave and their rules</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/leave_policies/leave_policy_index.php">10. Leave Policies</a>
+                    <span class="table-name">`leave_policies`</span>
+                    <p>Create and manage leave policy frameworks</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/leave_policy_rules/leave_policy_rule_index.php">11. Policy Rules</a>
+                    <span class="table-name">`leave_policy_rules`</span>
+                    <p>Define accrual rules for each leave type</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/employee_leave_policies/employee_leave_policy_index.php">12. Employee Policies</a>
+                    <span class="table-name">`employee_leave_policies`</span>
+                    <p>Assign policies to individual employees</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/employee_leave_balances/employee_leave_balance_index.php
+                    ">13. Leave Balances</a>
+                    <span class="table-name">`employee_leave_balances`</span>
+                    <p>View and manage employee leave balances</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/leave_accruals/leave_accrual_index.php">14. Leave Accruals</a>
+                    <span class="table-name">`leave_accruals`</span>
+                    <p>Track leave accrual transactions</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/leave_applications/leave_application_index.php">15. Leave Applications</a>
+                    <span class="table-name">`leave_applications`</span>
+                    <p>Process employee leave requests</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/leave_approval_workflow/leave_approval_workflow_index.php">16. Approval Workflow</a>
+                    <span class="table-name">`leave_approval_workflow`</span>
+                    <p>Manage multi-level leave approval process</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/leave_blackout_periods/leave_blackout_period_index.php">17. Blackout Periods</a>
+                    <span class="table-name">`leave_blackout_periods`</span>
+                    <p>Configure restricted leave periods</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/leave_attachments/leave_attachment_index.php">18. Leave Attachments</a>
+                    <span class="table-name">`leave_attachments`</span>
+                    <p>Manage documents submitted with leave requests</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Time & Attendance Section -->
+        <div class="schema-section">
+            <h2>Time & Attendance</h2>
+            <div class="link-grid">
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/work_schedules/work_schedule_index.php">19. Work Schedules</a>
+                    <span class="table-name">`work_schedules`</span>
+                    <p>Define shift patterns and working hours</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/employee_schedules/employee_schedule_index.php">20. Employee Schedules</a>
+                    <span class="table-name">`employee_schedules`</span>
+                    <p>Assign schedules to employees</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/attendance_records/attendance_record_index.php">21. Attendance Records</a>
+                    <span class="table-name">`attendance_records`</span>
+                    <p>View and manage daily attendance data</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/attendance_adjustments/attendance_adjustment_index.php">22. Attendance Adjustments</a>
+                    <span class="table-name">`attendance_adjustments`</span>
+                    <p>Track changes to attendance records</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Payroll Integration Section -->
+        <div class="schema-section">
+            <h2>Payroll Integration</h2>
+            <div class="link-grid">
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/pay_periods/pay_period_index.php">23. Pay Periods</a>
+                    <span class="table-name">`pay_periods`</span>
+                    <p>Manage payroll processing cycles</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/leave_encashment/leave_encashment_index.php">24. Leave Encashment</a>
+                    <span class="table-name">`leave_encashment`</span>
+                    <p>Process unused leave payments</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/leave_impact_on_payroll/leave_impact_index.php">25. Payroll Impact</a>
+                    <span class="table-name">`leave_impact_on_payroll`</span>
+                    <p>View how leave affects payroll calculations</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notifications & Auditing Section -->
+        <div class="schema-section">
+            <h2>System Management</h2>
+            <div class="link-grid">
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/notifications/notification_index.php">26. Notifications</a>
+                    <span class="table-name">`notifications`</span>
+                    <p>Manage system alerts and messages</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/audit_logs/audit_log_index.php">27. Audit Logs</a>
+                    <span class="table-name">`audit_logs`</span>
+                    <p>Review system changes and user activities</p>
+                </div>
+                <div class="link-card">
+                    <a href="http://localhost/Leave_mangement/system_settings/system_setting_index.php">28. System Settings</a>
+                    <span class="table-name">`system_settings`</span>
+                    <p>Configure global system parameters</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
