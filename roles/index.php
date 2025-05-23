@@ -7,301 +7,244 @@
   <title>Role Management System</title>
   
   <style>
-    :root {
-      --primary: #3A86FF;       /* Primary blue color */
-      --primary-light: #E6F0FF; /* Light blue for active states */
-      --sidebar-bg: #F5F7FA;    /* Light gray sidebar background */
-      --card-bg: #FFFFFF;       /* White card backgrounds */
-      --border: #E9ECEF;        /* Light border color */
-      --text-dark: #212529;     /* Dark text for headings */
-      --text-gray: #6C757D;     /* Gray text for secondary information */
-      --text-light: #F8F9FA;    /* Very light text (not much used) */
-      --success: rgb(0, 126, 92);       /* Green for success states */
-      --danger: rgb(255, 0, 47);        /* Red for danger/delete actions */
-    }
-    
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-    }
-    
-    body {
-      background-color: var(--light);
-      color: var(--dark);
-      line-height: 1.6;
-      font-weight: 400;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-    }
-    
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    
-    /* Monospace font for code elements */
-    code, pre, input, textarea {
-      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-    }
-    
-    .dashboard {
-      display: flex;
-      min-height: 100vh;
-    }
-    
-    /* Sidebar Styles */
-    .sidebar {
-      background-color: var(--sidebar-bg);
-      width: 280px;
-      padding: 24px;
-      border-right: 1px solid var(--border);
-      transition: var(--transition);
-    }
-    
-    .sidebar-header {
-      margin-bottom: 32px;
-    }
-    
-    .sidebar-header h1 {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 4px;
-    }
-    
-    .sidebar-header .stat {
-      font-size: 14px;
-      color: var(--gray);
-    }
-    
-    .sidebar-nav {
-      list-style: none;
-      margin-bottom: 32px;
-    }
-    
-    .sidebar-nav li {
-      margin-bottom: 8px;
-    }
-    
-    .sidebar-nav a {
-      display: flex;
-      align-items: center;
-      padding: 10px 12px;
-      color: var(--dark);
-      border-radius: 6px;
-      transition: var(--transition);
-      font-size: 14px;
-    }
-    
-    .sidebar-nav a:hover {
-      background-color: #E9ECEF;
-    }
-    
-    .sidebar-nav a.active {
-      background-color: #E6F0FF;
-      color: var(--primary);
-      font-weight: 500;
-    }
-    
-    /* Main Content Styles */
-    .main-content {
-      flex: 1;
-      padding: 32px;
-      overflow-y: auto;
-    }
-    
-    .content-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 32px;
-    }
-    
-    .content-header h1 {
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--dark);
-    }
-    
-    /* Quick Stats Grid */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr); /* Four equal columns */
-      gap: 16px; /* Spacing between cards */
-      margin-bottom: 32px;
-    }
-    
-    @media (max-width: 768px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr); /* Two columns on smaller screens */
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .stats-grid {
-        grid-template-columns: 1fr; /* Single column on very small screens */
-      }
-    }
-    
-    .stat-card {
-      background: var(--card-bg);
-      border-radius: 8px;
-      padding: 16px;
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .stat-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    
-    .stat-card h3 {
-      font-size: 14px;
-      color: var(--gray);
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-    
-    .stat-card .value {
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--dark);
-    }
-    
-    /* Card Styles */
-    .card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 24px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-      border: 1px solid var(--border);
-      transition: var(--transition);
-    }
-    
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-    
-    .card h2 {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 24px;
-    }
-    
-    /* Form Styles */
-    .form-group {
-      margin-bottom: 20px;
-    }
-    
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--dark);
-    }
-    
-    input[type="text"] {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 14px;
-      transition: var(--transition);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    }
-    
-    input[type="text"]:focus {
-      border-color: var(--primary);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.1);
-    }
-    
-    .checkbox-group {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    
-    .checkbox-group input {
-      margin-right: 8px;
-    }
-    
-    /* Button Styles */
-    button {
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 500;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    }
-    
-    button:hover {
-      background-color: #2A75E6;
-    }
-    
-    button.danger {
-      background-color: var(--danger);
-    }
-    
-    button.danger:hover {
-      background-color: #E63946;
-    }
-    
-    button.success {
-      background-color: var(--success);
-    }
-    
-    button.success:hover {
-      background-color:rgb(3, 33, 27);
-    }
-    
-    button[disabled] {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-    
-    /* Table Styles */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 16px;
-      font-size: 14px;
-    }
-    
-    th, td {
-      padding: 12px 16px;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
-    
-    th {
-      font-weight: 500;
-      color: var(--gray);
-      text-transform: uppercase;
-      font-size: 12px;
-      letter-spacing: 0.5px;
-      background-color: #FAFAFA;
-    }
-    
-    tr:hover {
-      background-color: #F8F9FA;
-    }
+   :root {
+    /* GitHub Color Palette */
+    --primary: #0969da;          /* GitHub's primary blue */
+    --primary-light: #f6f8fa;    /* GitHub's light background */
+    --sidebar-bg: #f6f8fa;       /* GitHub's sidebar background */
+    --card-bg: #ffffff;          /* White background */
+    --border: #d0d7de;           /* GitHub's border color */
+    --border-muted: #d8dee4;     /* GitHub's muted border */
+    --text-dark: #24292f;        /* GitHub's primary text */
+    --text-gray: #57606a;        /* GitHub's muted text */
+    --text-light: #6e7781;       /* GitHub's light text */
+    --success: #1a7f37;          /* GitHub's success green */
+    --danger: #cf222e;           /* GitHub's danger red */
+    --neutral-muted: rgba(175, 184, 193, 0.2); /* GitHub's muted background */
+
+    /* Button Colors */
+    --btn-primary-bg: #2da44e;
+    --btn-primary-hover: #2c974b;
+    --btn-danger-bg: #d1242f;
+    --btn-danger-hover: #b62324;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+  
+  body {
+    background-color: var(--primary-light);
+    color: var(--text-dark);
+    line-height: 1.5; /* GitHub's line-height */
+    font-size: 14px;  /* GitHub's base font size */
+  }
+  
+  a {
+    text-decoration: none;
+    color: var(--primary);
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Monospace font for code elements */
+  code, pre, input, textarea {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  
+  .dashboard {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* Sidebar Styles - GitHub inspired */
+  .sidebar {
+    background-color: var(--sidebar-bg);
+    width: 280px;
+    padding: 16px;
+    border-right: 1px solid var(--border);
+  }
+  
+  .sidebar-header {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .sidebar-header h1 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+  }
+  
+  .sidebar-header .stat {
+    font-size: 14px;
+    color: var(--text-gray);
+  }
+  
+  .sidebar-nav {
+    list-style: none;
+    margin-bottom: 16px;
+  }
+  
+  .sidebar-nav li {
+    margin-bottom: 4px;
+  }
+  
+  .sidebar-nav a {
+    display: flex;
+    align-items: center;
+    padding: 8px 8px;
+    color: var(--text-dark);
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
+  .sidebar-nav a:hover {
+    background-color: var(--neutral-muted);
+  }
+  
+  .sidebar-nav a.active {
+    background-color: var(--primary);
+    color: white;
+    font-weight: 600;
+  }
+  
+  /* Main Content Styles */
+  .main-content {
+    flex: 1;
+    padding: 32px;
+    overflow-y: auto;
+  }
+  
+  .content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .content-header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+  
+  /* Card Styles - GitHub inspired */
+  .card {
+    background: var(--card-bg);
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+  }
+  
+  .card h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+  }
+  
+  /* Form Styles */
+  .form-group {
+    margin-bottom: 16px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  
+  input[type="text"]:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.3);
+  }
+  
+  /* Button Styles - GitHub inspired */
+  button {
+    background-color: var(--primary);
+    color: white;
+    border: 1px solid rgba(27, 31, 36, 0.15);
+    padding: 5px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  
+  button:hover {
+    background-color: #0969da;
+  }
+  
+  button.danger {
+    background-color: var(--btn-danger-bg);
+  }
+  
+  button.danger:hover {
+    background-color: var(--btn-danger-hover);
+  }
+  
+  button.success {
+    background-color: var(--btn-primary-bg);
+  }
+  
+  button.success:hover {
+    background-color: var(--btn-primary-hover);
+  }
+  
+  /* Table Styles - GitHub inspired */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+  
+  th, td {
+    padding: 8px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-muted);
+  }
+  
+  th {
+    font-weight: 600;
+    color: var(--text-gray);
+    background-color: var(--sidebar-bg);
+  }
+  
+  tr:hover {
+    background-color: var(--neutral-muted);
+  }
+
     
     .action-buttons {
       display: flex;
@@ -313,22 +256,20 @@
       font-size: 13px;
     }
     
-    /* Loading Spinner */
     .loading-spinner {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      border: 2px solid #fff;
-      border-top: 2px solid transparent;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin-right: 8px;
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 8px;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
     /* Responsive */
     @media (max-width: 1024px) {
       .dashboard {
@@ -399,6 +340,9 @@
    /* Realistic Card-Style Notification */
 .notification {
   position: fixed;
+   background-color: var(--card-bg);
+    color: var(--text-dark);
+    border: 1px solid var(--border);
   top: 20px;
   left: 50%;
   transform: translateX(-50%) translateY(0);
